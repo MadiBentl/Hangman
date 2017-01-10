@@ -23,7 +23,7 @@ function init(){
     console.log("Congratulations! You won with " + lives + " lives left!");
   }
   else if (lives == 0){
-    console.log("Unfortunately you lost! Better luck next time)
+    console.log("Unfortunately you lost! Better luck next time")
   }
 }
 function selectWord (){
@@ -53,6 +53,7 @@ function guessLetter(){
 }
 
 function displayWord(word){
+  $("body").append("<h1>" + guessedWord.join("") + "</h1>");
   console.log(guessedWord);
 }
 function turn(){
