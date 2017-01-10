@@ -53,7 +53,7 @@ function guessLetter(){
 }
 
 function displayWord(word){
-  $("body").append("<h1>" + guessedWord.join("") + "</h1>");
+  $("#word").html("<h1>" + guessedWord.join("") + "</h1>");
   console.log(guessedWord);
 }
 function turn(){
