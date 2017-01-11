@@ -64,20 +64,27 @@ function turn(){
 function validateGuessedLetter(lett){
   //test if submission is 1char & a letter;
   if (!(lett.length == 1 && lett.match(/[a-z]/i))){
+    $("#description").html("<h1>letter is not valid</h1>");
     console.log("letter is not valid");
     return;
   }
   else if (guessedLetters.indexOf(lett) > -1){
+    $("#description").html("<h1>You have already guessed this letter</h1>");
     console.log("You have already guessed this letter");
     return;
   } else if (word.indexOf(lett) > -1){
+    $("#description").html("<h1>" + lett + " is valid</h1>");
     console.log(lett + " is valid.");
     editGuessedWord(lett);
     return;
   } else{
     console.log("There are no " + lett + "'s in the word.");
+    $("#description").html("<h1>There are no " + lett + "'s in the word.</h1>");
     lives = lives - 1;
-    console.log("You have lost one life! You have " + lives + " left.");
+    $("#lives").html("<h1>" + lives + "</h1>");
+    console.log("You have lost one life! You have " + lives + " lives left.");
+    $("#description").html("<h1>You have lost one life! You have " + lives + " left.</h1>");
+
   }
 }
 
