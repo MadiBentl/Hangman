@@ -5,7 +5,7 @@ var words = ["Modigliani", "Charlemagne", "Champagne", "Picasso", "Kowabunga",
               "Vancouver", "Renumerative", "Magnanimous", "California", "Anecdotal"]
 var word = "";
 var guessedWord = [];
-var guessedLetter = "";
+//var guessedLetter = "";
 var guessedLetters = [];
 var lives = 6;
 var userGuess = "";
@@ -21,6 +21,7 @@ function init(){
   displayLetters();
   while (!validateWord() && lives > 0){
     turn();
+    lives = 0;
   }
   if (validateWord() == true){
     console.log("Congratulations! You won with " + lives + " lives left!");
@@ -51,15 +52,23 @@ function validateWord(){
 }
 
 function guessLetter(){
-  guessedLetter = "";
-  $(document).ready(function(){
-    $('.square').on('click', function(){
-    $(this).addClass("guessed");
-    guessedLetter = $(this).innerHtml;
-    });
+
+  var guessedYet = false;
+  if (guessedYet == false){
+    console.log("awaiting click");
+    $(document).ready(function(){
+      var guessedLetter = "";
+      $('.square').on('click', function(){
+        //$(this).addClass("guessed");
+        console.log("click");
+        guessedLetter = $(this).innerHtml;
+        guessedYet = true;
+        console.log(guessedLetter);
+        return guessedLetter;
+      });
   });
-  console.log(guessedLetter);
-  return guessedLetter;
+}
+
 }
 
 function displayWord(word){
