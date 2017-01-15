@@ -52,7 +52,13 @@ function validateWord(){
 
 function guessLetter(){
   guessedLetter = "";
-  guessedLetter = prompt("Please Enter a Letter");
+  $(document).ready(function(){
+    $('.square').on('click', function(){
+    $(this).addClass("guessed");
+    guessedLetter = $(this).innerHtml;
+    });
+  });
+  console.log(guessedLetter);
   return guessedLetter;
 }
 
@@ -63,7 +69,7 @@ function displayWord(word){
 
 function displayLetters(){
   for (var x = 0; x < alphabet.length; x++){
-    $("#letters").append("<div class = 'square'><h2><a href = '#'>" + alphabet[x] + "</a></h2></div>");
+    $("#letters").append("<div class = 'square'><a href = '#'><h2>" + alphabet[x] + "</h2></a></div>");
   }
 }
 
