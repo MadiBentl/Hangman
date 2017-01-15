@@ -9,6 +9,8 @@ var guessedLetter = "";
 var guessedLetters = [];
 var lives = 6;
 var userGuess = "";
+var alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m"
+                ,"n", "o","p","q","r","s","t","u","v","w","x","y","z"];
 
 init();
 
@@ -16,6 +18,7 @@ function init(){
   selectWord();
   createGuessedWord();
   displayWord(guessedWord);
+  displayLetters();
   while (!validateWord() && lives > 0){
     turn();
   }
@@ -46,6 +49,7 @@ function validateWord(){
   }
   return true;
 }
+
 function guessLetter(){
   guessedLetter = "";
   guessedLetter = prompt("Please Enter a Letter");
@@ -56,6 +60,16 @@ function displayWord(word){
   $("#word").html("<h1>" + guessedWord.join("") + "</h1>");
   console.log(guessedWord);
 }
+
+function displayLetters(){
+  for (var x = 0; x < alphabet.length; x++){
+    $("#letters").append("<div class = 'square' style= 'display:inline'><h2 style='display:inline'><a href = '#'>" + alphabet[x] + "</a></h2></div>");
+    if (x % 7 == 0){
+      $("#letters").append("<br>");
+    };
+  }
+}
+
 function turn(){
   var letter = guessLetter().toLowerCase();
   console.log(letter);
