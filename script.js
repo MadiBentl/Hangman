@@ -63,10 +63,7 @@ function displayWord(word){
 
 function displayLetters(){
   for (var x = 0; x < alphabet.length; x++){
-    $("#letters").append("<div class = 'square' style= 'display:inline'><h2 style='display:inline'><a href = '#'>" + alphabet[x] + "</a></h2></div>");
-    if (x % 7 == 0){
-      $("#letters").append("<br>");
-    };
+    $("#letters").append("<div class = 'square'><h2><a href = '#'>" + alphabet[x] + "</a></h2></div>");
   }
 }
 
