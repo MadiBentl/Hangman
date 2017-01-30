@@ -8,6 +8,7 @@ var guessedWord = [];
 //var guessedLetter = "";
 var guessedLetters = [];
 var lives = 6;
+var letter = "";
 var userGuess = "";
 var alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m"
                 ,"n", "o","p","q","r","s","t","u","v","w","x","y","z"];
@@ -19,16 +20,7 @@ function init(){
   createGuessedWord();
   displayWord(guessedWord);
   displayLetters();
-  while (!validateWord() && lives > 0){
-    turn();
-    lives = 0;
-  }
-  if (validateWord() == true){
-    console.log("Congratulations! You won with " + lives + " lives left!");
-  }
-  else if (lives == 0){
-    console.log("Unfortunately you lost! Better luck next time")
-  }
+  guessLetter()
 }
 function selectWord (){
   console.log("Generating your word");
@@ -50,24 +42,27 @@ function validateWord(){
   }
   return true;
 }
-
+function gameOver(){
+  if (validateWord() == true){
+    $("#description").html("<p>Congratulations! You won with " + lives + " lives left!</p>");
+  }
+  else if (lives == 0){
+    $("#description").html("<p>Unfortunately you lost! Better luck next time</p>");
+  }
+}
 function guessLetter(){
-
-  var guessedYet = false;
-  if (guessedYet == false){
-    console.log("awaiting click");
     $(document).ready(function(){
       var guessedLetter = "";
-      $('.square').on('click', function(){
-        //$(this).addClass("guessed");
-        console.log("click");
-        guessedLetter = $(this).innerHtml;
-        guessedYet = true;
-        console.log(guessedLetter);
-        return guessedLetter;
-      });
+      var unclicked = true;
+      if (unclicked == true){
+        $('.square').on('click', function(){
+          guessedLetter = $(this).text();
+          console.log(guessedLetter + " fn guessLetter");
+          validateGuessedLetter(guessedLetter);
+          gameOver();
+        });
+    }
   });
-}
 
 }
 
@@ -82,34 +77,33 @@ function displayLetters(){
   }
 }
 
-function turn(){
-  var letter = guessLetter().toLowerCase();
-  console.log(letter);
-  validateGuessedLetter(letter);
-}
+/*function turn(){
+  console.log("is turn");
+    guessLetter();
+    console.log(letter + " fn turn")
+    console.log(lives);
+    if (letter.length == 1){
+      validateGuessedLetter(guessLetter());
+    }
+}*/
 function validateGuessedLetter(lett){
   //test if submission is 1char & a letter;
-  if (!(lett.length == 1 && lett.match(/[a-z]/i))){
-    $("#description").html("<h1>letter is not valid</h1>");
-    console.log("letter is not valid");
-    return;
-  }
-  else if (guessedLetters.indexOf(lett) > -1){
-    $("#description").html("<h1>You have already guessed this letter</h1>");
+  if (guessedLetters.indexOf(lett) > -1){
+    $("#description").html("<p>You have already guessed this letter</p>");
     console.log("You have already guessed this letter");
     return;
   } else if (word.indexOf(lett) > -1){
-    $("#description").html("<h1>" + lett + " is valid</h1>");
+    $("#description").html("<p>" + lett + " is valid</p>");
     console.log(lett + " is valid.");
     editGuessedWord(lett);
     return;
-  } else{
+  } else {
     console.log("There are no " + lett + "'s in the word.");
-    $("#description").html("<h1>There are no " + lett + "'s in the word.</h1>");
+    $("#description").html("<p>There are no " + lett + "'s in the word.</p>");
     lives = lives - 1;
     $("#lives").html("<h1>" + lives + "</h1>");
     console.log("You have lost one life! You have " + lives + " lives left.");
-    $("#description").html("<h1>You have lost one life! You have " + lives + " left.</h1>");
+    $("#description").html("<p>You have lost one life! You have " + lives + " left.</p>");
 
   }
 }
