@@ -104,6 +104,7 @@ function validateGuessedLetter(lett){
     $("#lives").html("<h1>" + lives + "</h1>");
     console.log("You have lost one life! You have " + lives + " lives left.");
     $("#description").html("<p>You have lost one life! You have " + lives + " left.</p>");
+    $("#guessedLetters").append(lett);
 
   }
 }
